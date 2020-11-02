@@ -1,2 +1,9 @@
 # nvim-config
- This is the config for neovim. And my dotfiles submodule.
+
+This is neovim config like a vscode.
+
+```bash
+$ git clone git@github.com:hey3/nvim-config.git 
+$ nvim
+:PlugInstall
+```
