@@ -70,6 +70,7 @@ set smarttab
 set cindent
 set tabstop=2
 set shiftwidth=2
+set mouse=
 " always uses spaces instead of tab characters
 set expandtab
 
