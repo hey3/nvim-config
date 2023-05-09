@@ -64,16 +64,20 @@ require('jetpack.packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } },
+    requires = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-treesitter/nvim-treesitter' }
+    },
     config = function()
-      vim.keymap.set('n', '<C-f>', require('telescope.builtin').find_files, { noremap = true })
+      vim.keymap.set('n', '<Leader>f', require('telescope.builtin').find_files, { noremap = true })
+      vim.keymap.set('n', '<Leader>g', require('telescope.builtin').live_grep, { noremap = true })
     end
   }
   -- ファイラ
   use {
     'lambdalisue/fern.vim',
     config = function()
-      vim.keymap.set('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=30<CR>', { noremap = true })
+      vim.keymap.set('n', '<Leader>1', ':Fern . -reveal=% -drawer -toggle -width=30<CR>', { noremap = true })
     end
   }
 end)
