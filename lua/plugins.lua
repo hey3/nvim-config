@@ -32,7 +32,12 @@ require('jetpack.packer').startup(function(use)
         'coc-json'
       }
 
-      local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
+      local opts = { silent = true, noremap = true, expr = true, replace_keycodes = true }
+
+      function check_back_space()
+        local col = vim.api.nvim_win_get_cursor(0)[2]
+        return (col == 0 or vim.api.nvim_get_current_line():sub(col, col):match('%s')) and true
+      end
 
       vim.keymap.set('i', '<Tab>',
         function()
@@ -40,23 +45,25 @@ require('jetpack.packer').startup(function(use)
             return vim.fn['coc#pum#next'](1)
           end
           if check_back_space() then
-            return vim.fn['coc#refresh']()
+            return '<Tab>'
           end
-          return '<Tab>'
+          return vim.fn['coc#refresh']()
         end, opts)
+
       vim.keymap.set('i', '<S-Tab>',
         function()
           if vim.fn['coc#pum#visible']() == 1 then
             return vim.fn['coc#pum#prev'](1)
           end
-          return '<S-Tab>'
+          return '<C-h>'
         end, opts)
+
       vim.keymap.set('i', '<CR>',
         function()
           if vim.fn['coc#pum#visible']() == 1 then
             return vim.fn['coc#pum#confirm']();
           end
-          return '\r'
+          return '<CR>'
         end, opts)
     end
   }
