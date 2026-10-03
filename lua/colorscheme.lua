@@ -1,8 +1,8 @@
-vim.cmd [[
-  try
-    colorscheme gruvbox
-  catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme default
-    set background=dark
-  endtry
-]]
+vim.opt.background = "dark"
+vim.opt.termguicolors = true
+
+local ok = pcall(vim.cmd.colorscheme, "gruvbox")
+
+if not ok then
+  vim.cmd.colorscheme("default")
+end
